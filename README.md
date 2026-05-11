@@ -26,10 +26,11 @@ Don't settle for a fixed UI. Create your own controller:
 *   **JSON Ecosystem:** Export your custom layouts to JSON files to share your "pro setups" with other players. (will soon be added)
 
 ### 🚀 Performance & Optimization
-Built specifically to run on low-end hardware (tested on 3GB RAM / Android 8.1):
+**NOT** Built specifically to run on low-end hardware (tested on 3GB RAM / Android 8.1):
 *   **Dual-Engine Architecture:** Switch between **Legacy (v2021)** for old-school compatibility and **Modern (v2026)** for the latest Ruffle features.
-*   **Turbo Mode (Potato Mode):** A one-tap boost that disables heavy realism effects and uses **Resolution Scaling** (internal downsampling) to multiply your FPS on weak GPUs.
+*   **Turbo Mode (Potato Mode):** A one-tap boost that disables heavy realism effects to multiply your FPS on weak GPUs.
 *   **Realism Mode:** High-fidelity real-time mouse tracking for games that require precise "hover" events.
+*    **WARNING:** PLEASE DONT TRY ON LOWEND DEVICES (FOR RESOURCE EXPENSIVE GAMES) IT CONVERENTS FLASH TO SOME RUFFLE THING TO WASM OR SOEETIHNG IDK AND YOU HAVE YOUR TIHNG LOW END DEVICES DONT HANDLE THAT VERY WELL!!!!!!!!!!!!!!!!!
 
 ### ⌨️ Integrated Virtual Keyboard
 No more fighting with the Android system keyboard.

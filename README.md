@@ -1,14 +1,3 @@
-Since your project has become a full-blown, professional-grade emulator, your
-README should reflect that. It needs to look great on GitHub to show off all the
-hard work you put into the hybrid controls and engine switching.
-
-Here is a complete, high-quality README.md.
-
-To use this:
-
-1.  Open your README.md file.
-2.  Delete everything inside it.
-3.  Paste the code below.
 
 # ⚡ FlashEmu Pro
 

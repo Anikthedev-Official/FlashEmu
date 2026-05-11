@@ -1,103 +1,87 @@
-
 # ⚡ FlashEmu Pro
 
-A high-performance, feature-rich Flash Emulator for Android, powered by the Ruffle engine. Built for power users who want total control over their gaming experience on mobile.
+**The ultimate, high-performance Flash emulator for Android.** 
 
-![Version](https://img.shields.io/badge/Version-Pro--Stable-orange)
-![Platform](https://img.shields.io/badge/Platform-Android-green)
-![Engine](https://img.shields.io/badge/Engine-Ruffle_WASM-blue)
+FlashEmu Pro isn't just a player—it's a complete input environment. It is designed to make complex Flash games (like *Stick War*) fully playable on mobile devices by bridging the gap between touchscreens and keyboard/mouse controls.
 
-## 🚀 Key Features
-
-### 🕹️ Hybrid Input System
-*   **Joystick Mode:** Classic virtual stick for movement and cursor control.
-*   **Direct Touch:** Tap anywhere on the screen to move the cursor instantly.
-*   **Super Mode (Hybrid):** The ultimate setup. Use the joystick to send keyboard inputs (WASD/Arrows) to the game while using the touch screen to aim the mouse.
-
-### ⚙️ Pro-Level Customization
-*   **Custom Layout Editor:** A full visual editor to place buttons and joysticks anywhere on the screen.
-*   **Action Mapping:** Map any button to a Mouse Click (L/M/R) or any Keyboard key (A-Z, 0-9, Space, Enter, etc.).
-*   **Export/Import:** Save your custom layouts to JSON and share them with other players.
-*   **Dynamic Sizing:** Real-time slider to adjust the size of your controls to fit your fingers.
-
-### 🛠️ Engine & Performance
-*   **Dual-Engine Support:** Switch between **Legacy (v2021)** for older games (like Stick War) and **Modern (v2026)** for newer Flash content.
-*   **Turbo Mode (Potato Mode):** Optimized for low-end devices (3GB RAM). It uses resolution scaling and `pixelated` rendering to boost FPS on old hardware.
-*   **Realism Mode:** Real-time mouse tracking that sends continuous events to the game for smooth hover effects.
-
-### 📚 Game Management
-*   **JSON Game Library:** A built-in database to organize and launch your favorite SWF files.
-*   **Local & Web Loading:** Load games directly from your phone's storage or via a web URL.
-*   **Virtual Keyboard:** A full slide-up keyboard for games that require typing.
+![Version](https://img.shields.io/badge/Version-Final_Pro-orange)
+![Platform](https://img.shields.io/badge/Platform-Android_Cordova-green)
+![Engine](https://img.shields.io/badge/Engine-Ruffle_DualCore-blue)
 
 ---
 
-## 🛠️ Installation & Setup
+## 🌟 Pro Features
+
+### 🕹️ Advanced Hybrid Input System
+Stop fighting with basic touch controls. FlashEmu Pro offers three distinct interaction modes:
+*   **Joystick Mode:** Classical virtual stick for movement and cursor control.
+*   **Direct Touch:** The screen becomes your trackpad. Tap and slide to move the cursor instantly.
+*   **Super Mode (Hybrid):** The power-user setup. The **Joystick** sends Keyboard events (WASD/Arrows) while the **Touch Screen** controls the mouse. Perfect for strategy and action games.
+
+### 🛠️ Custom Layout Engine (Visual Editor)
+Don't settle for a fixed UI. Create your own controller:
+*   **Visual Editor:** A dedicated layout page to drag and drop buttons and joysticks.
+*   **Precision Mapping:** Set exact X/Y percentages for every control.
+*   **Universal Actions:** Map any button to a Mouse Click (L/M/R), any Keyboard key (A-Z, 0-9), or complex combos.
+*   **JSON Ecosystem:** Export your custom layouts to JSON files to share your "pro setups" with other players. (will soon be added)
+
+### 🚀 Performance & Optimization
+Built specifically to run on low-end hardware (tested on 3GB RAM / Android 8.1):
+*   **Dual-Engine Architecture:** Switch between **Legacy (v2021)** for old-school compatibility and **Modern (v2026)** for the latest Ruffle features.
+*   **Turbo Mode (Potato Mode):** A one-tap boost that disables heavy realism effects and uses **Resolution Scaling** (internal downsampling) to multiply your FPS on weak GPUs.
+*   **Realism Mode:** High-fidelity real-time mouse tracking for games that require precise "hover" events.
+
+### ⌨️ Integrated Virtual Keyboard
+No more fighting with the Android system keyboard.
+*   **Slide-up Overlay:** A dedicated, semi-transparent keyboard.
+*   **Full Support:** Includes the full alphabet, number row, and special keys (Enter, Space, Esc, Shift, Ctrl).
+
+### 📚 Game Library & Management
+*   **JSON Database:** Organize your games by category (Strategy, Action, etc.).
+*   **Multi-Source Loading:** Load `.swf` files from your phone's internal storage or directly via Web URLs.
+*   **Smart Boot:** A custom boot-loader with a progress bar ensures the engine is fully initialized before the game starts.
+
+---
+
+## 🛠️ Installation & Build Guide
 
 ### Prerequisites
 *   [Node.js](https://nodejs.org/)
 *   [Cordova CLI](https://cordova.apache.org/) (`npm install -g cordova`)
-*   Android SDK & Build Tools (Android Studio)
+*   Android SDK & Build Tools (via Android Studio)
 
 ### Building the APK
-1. **Clone the repository:**
+1. **Clone the repo:**
    ```bash
    git clone https://github.com/Anikthedev-Official/FlashEmu.git
    cd FlashEmu
 
-2.  Add the Android platform:
+2.  Add Android platform:
     cordova platform add android
-3.  Install required plugins:
+3.  Install the WebView plugin (Crucial for WASM):
     cordova plugin add cordova-plugin-ionic-webview
-4.  Build the project:
+4.  Build the APK:
     cordova build android
 
-🎮 How to Use
+📂 Project Architecture
 
-Layout Editor
-
-1.  Open the app and click the ⚙️ Settings icon.
-2.  Click the Layout Editor button.
-3.  Use the Visualizer to drag and drop buttons.
-4.  Set the Action (e.g., key:w for walking up).
-5.  Click Save Layout to apply changes.
-
-Super Mode Setup
-
-1.  Go to Settings \rightarrow Control Mode \rightarrow Super Mode.
-2.  Set Joystick Mapping to WASD.
-3.  Now, use the left stick to move your character and the right side of the
-    screen to aim your mouse.
-
-📂 Project Structure
-```
 ├── www/
-│   ├── index.html          # Main Entry point
-│   ├── style.css           # Glassmorphism UI Styles
+│   ├── index.html          # Main Application Shell
+│   ├── config.html         # Visual Layout Editor
+│   ├── config.js           # Layout Saving/Loading Logic
 │   ├── app.js              # The "Brain" (Dispatcher & Engine Logic)
-│   ├── config.html         # Layout Editor Page
-│   ├── config.js           # Layout Saving Logic
-│   ├── games.json          # Your Game Library database
+│   ├── style.css           # Glassmorphism & Theme Styles
+│   ├── games.json          # Game Library Database
 │   └── engines/
-│       ├── v2021/          # Legacy Ruffle Engine
-│       └── v2026/          # Modern Ruffle Engine
-├── config.xml              # Cordova Configuration
-└── more blah blash         # BLAHS BLAH
-```
-
+│       ├── v2021/          # Legacy Ruffle Engine (Stable for old games)
+│       └── v2026/          # Modern Ruffle Engine (Latest features)
+└── config.xml              # Cordova App Config
 
 🤝 Credits
 
-Built using the Ruffle project. Special thanks to the Ruffle developers for
-making Flash playable in the modern era.
+Built upon the incredible work of the Ruffle team. This project extends Ruffle's
+capabilities to provide a native-feeling gaming experience on Android.
 
 Developed with ⚡ and a lot of patience by Anikthedev-Official.
 
 
-### Why this is a great README:
-1.  **Professionalism:** It uses badges and clear sections, making the project look like a real product.
-2.  **Clarity:** It explains exactly what "Super Mode" and "Turbo Mode" are, which are your best features.
-3.  **Documentation:** It gives anyone who downloads your code a clear guide on how to build the APK.
-4.  **Structure:** It shows the folder organization so other developers can understand your project.
-
-**Now just push this to GitHub and your repository will look amazing!** 🚀

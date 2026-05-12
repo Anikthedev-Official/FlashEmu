@@ -4,9 +4,9 @@
 
 FlashEmu Pro isn't just a player—it's a complete input environment. It is designed to make complex Flash games (like *Stick War*) fully playable on mobile devices by bridging the gap between touchscreens and keyboard/mouse controls.
 
-![Version](https://img.shields.io/badge/Version-Final_Pro-orange)
+![Version](https://img.shields.io/badge/Version-Pro_0.0.2-orange)
 ![Platform](https://img.shields.io/badge/Platform-Android_Cordova-green)
-![Engine](https://img.shields.io/badge/Engine-Ruffle_DualCore-blue)
+![Engine](https://img.shields.io/badge/Engine-Ruffle-orange)
 
 ---
 

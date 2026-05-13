@@ -1,4 +1,4 @@
-<?xml version="1.0.0" encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <widget id="com.mustakim.flash" version="0.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>BlackHat Pro</name>
     <description>
@@ -11,24 +11,35 @@
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-navigation href="*" />
+
+    <!-- Global preferences -->
     <preference name="Orientation" value="landscape" />
     <preference name="Fullscreen" value="true" />
-    <!-- regular icons as fallback -->
-    <icon density="ldpi"    src="resources/android/icon/drawable-ldpi-icon.png" />
-    <icon density="mdpi"    src="resources/android/icon/drawable-mdpi-icon.png" />
-    <icon density="hdpi"    src="resources/android/icon/drawable-hdpi-icon.png" />
-    <icon density="xhdpi"   src="resources/android/icon/drawable-xhdpi-icon.png" />
-    <icon density="xxhdpi"  src="resources/android/icon/drawable-xxhdpi-icon.png" />
-    <icon density="xxxhdpi" src="resources/android/icon/drawable-xxxhdpi-icon.png" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="KeepRunning" value="true" />
+    <preference name="AndroidLaunchMode" value="singleTop" />
+    <preference name="HardwareAccelerated" value="true" />
+    <preference name="ShowTitle" value="false" />
+    <preference name="android-minSdkVersion" value="22" />
+    <preference name="android-targetSdkVersion" value="33" />
 
-    <!-- adaptive icon files -->
-    <resource-file src="resources/android/xml/adaptive_icon.xml"
-                   target="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" />
-    <resource-file src="resources/android/xml/adaptive_icon.xml"
-                   target="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" />
-    <resource-file src="resources/android/values/colors.xml"
-                   target="app/src/main/res/values/ic_launcher_colors.xml" />
-    <resource-file src="resources/android/icon/drawable-xxxhdpi-icon.png"
-                   target="app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png" />
-</platform>
+    <platform name="android">
+        <!-- regular icons -->
+        <icon density="ldpi"    src="resources/android/icon/drawable-ldpi-icon.png" />
+        <icon density="mdpi"    src="resources/android/icon/drawable-mdpi-icon.png" />
+        <icon density="hdpi"    src="resources/android/icon/drawable-hdpi-icon.png" />
+        <icon density="xhdpi"   src="resources/android/icon/drawable-xhdpi-icon.png" />
+        <icon density="xxhdpi"  src="resources/android/icon/drawable-xxhdpi-icon.png" />
+        <icon density="xxxhdpi" src="resources/android/icon/drawable-xxxhdpi-icon.png" />
+
+        <!-- adaptive icons -->
+        <resource-file src="resources/android/xml/adaptive_icon.xml"
+                       target="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" />
+        <resource-file src="resources/android/xml/adaptive_icon.xml"
+                       target="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" />
+        <resource-file src="resources/android/values/colors.xml"
+                       target="app/src/main/res/values/ic_launcher_colors.xml" />
+        <resource-file src="resources/android/icon/drawable-xxxhdpi-icon.png"
+                       target="app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png" />
+    </platform>
 </widget>

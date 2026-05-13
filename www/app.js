@@ -120,7 +120,10 @@ async function initPlayer() {
 // --- MAIN APP START ---
 window.onload = async () => {
     console.log("!!! APP.JS FILE LOADED SUCCESSFULLY !!!");
-    console.log("REACHED BEFORE TRY"); // add this
+    console.log("REACHED BEFORE TRY");
+            document.getElementById('left-controls').style.display  = 'none';
+        document.getElementById('right-controls').style.display = 'none';
+        document.getElementById('controls-layer').style.display = 'none'; // add this
 
     try {
         console.log("INSIDE TRY"); // add this
@@ -654,8 +657,8 @@ async function loadLibrary() {
             const isJoystick = appState.mode === 'joystick' || appState.mode === 'super';
 
             // Default left joystick + right buttons: show in joystick/super, hide otherwise
-            document.getElementById('left-controls').style.display  = isJoystick ? 'block' : 'none';
-            document.getElementById('right-controls').style.display = isJoystick ? 'block' : 'none';
+           // document.getElementById('left-controls').style.display  = isJoystick ? 'block' : 'none';
+           // document.getElementById('right-controls').style.display = isJoystick ? 'block' : 'none';
 
             // Custom layout layer: show in custom AND direct mode
             // (direct mode still shows key-buttons and key-joysticks, just skips mouse joystick)

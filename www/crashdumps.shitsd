@@ -242,3 +242,4 @@ async function loadLibrary() {
     } catch (e) { log("Lib Error: " + e.message); }
 }
 all hail errors
+BlackHatGuy.png // forget it  its gonna be icon.png

@@ -1,0 +1,13 @@
+{
+    "name": "BlackHat Pro",
+    "short_name": "BlackHat",
+    "start_url": "/index.html",
+    "display": "fullscreen",
+    "orientation": "landscape",
+    "background_color": "#0f0f0f",
+    "theme_color": "#f2711c",
+    "icons": [
+        { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" },
+        { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+    ]
+}

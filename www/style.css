@@ -162,3 +162,9 @@ select, input[type="text"], input[type="range"] {
     margin-top: 10px;
     opacity: 0.9;
 }
+#container {
+    will-change: transform;
+}
+#controls-layer {
+    will-change: transform;
+}

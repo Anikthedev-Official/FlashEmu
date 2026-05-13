@@ -1,12 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none">
-  <rect width="512" height="512" rx="110" fill="#0f0f0f"/>
-  <circle cx="256" cy="256" r="200" stroke="#f2711c" stroke-width="4" stroke-opacity=".3"/>
-  <rect x="120" y="180" width="272" height="30" rx="15" fill="#222"/>
-  <path d="m170 180 15-70s25-10 71-10 71 10 71 10l15 70" fill="#222" stroke="#333" stroke-width="2"/>
-  <rect x="240" y="245" width="31" height="8" rx="4" fill="#fff"/>
-  <circle cx="200" cy="260" r="45" fill="#fff"/>
-  <circle cx="312" cy="260" r="45" fill="#fff"/>
-  <circle cx="215" cy="245" r="8" fill="#a9a9a9" fill-opacity=".8"/>
-  <circle cx="325" cy="245" r="8" fill="#a9a9a9" fill-opacity=".8"/>
-  <text x="50%" y="430" text-anchor="middle" fill="#f2711c" font-family="Allan, sans-serif" font-weight="bold" font-size="42">PRO</text>
+  <!-- full bleed background — no rounding so no white edges -->
+  <rect width="512" height="512" fill="#0f0f0f"/>
+  <!-- subtle ring -->
+  <circle cx="256" cy="256" r="220" stroke="#f2711c" stroke-width="4" stroke-opacity=".25"/>
+  <!-- visor bar -->
+  <rect x="110" y="185" width="292" height="32" rx="16" fill="#1e1e1e"/>
+  <!-- hat brim -->
+  <path d="m160 185 18-75s28-12 78-12 78 12 78 12l18 75" fill="#1e1e1e" stroke="#2a2a2a" stroke-width="2"/>
+  <!-- nose bridge -->
+  <rect x="238" y="252" width="36" height="9" rx="4.5" fill="#ccc"/>
+  <!-- lenses -->
+  <circle cx="196" cy="268" r="48" fill="#e8e8e8"/>
+  <circle cx="316" cy="268" r="48" fill="#e8e8e8"/>
+  <!-- lens tint -->
+  <circle cx="196" cy="268" r="48" fill="#0f0f0f" fill-opacity=".15"/>
+  <circle cx="316" cy="268" r="48" fill="#0f0f0f" fill-opacity=".15"/>
+  <!-- pupils -->
+  <circle cx="210" cy="252" r="9" fill="#888" fill-opacity=".7"/>
+  <circle cx="328" cy="252" r="9" fill="#888" fill-opacity=".7"/>
+  <!-- PRO text -->
+  <text x="256" y="428" text-anchor="middle" fill="#f2711c" font-family="sans-serif" font-weight="900" font-size="56" letter-spacing="8">PRO</text>
 </svg>

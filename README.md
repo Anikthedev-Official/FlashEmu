@@ -1,8 +1,8 @@
-# ⚡ FlashEmu Pro
+# 🎩 BlackHat Pro
 
 **The ultimate, high-performance Flash emulator for Android.** 
 
-FlashEmu Pro isn't just a player—it's a complete input environment. It is designed to make complex Flash games (like *Stick War*) fully playable on mobile devices by bridging the gap between touchscreens and keyboard/mouse controls.
+BlackHat Pro isn't just a player—it's a complete input environment. It is designed to make complex Flash games (like *Stick War*) fully playable on mobile devices by bridging the gap between touchscreens and keyboard/mouse controls.
 
 ![Version](https://img.shields.io/badge/Version-Pro_0.0.2-orange)
 ![Platform](https://img.shields.io/badge/Platform-Android_Cordova-green)
@@ -13,7 +13,7 @@ FlashEmu Pro isn't just a player—it's a complete input environment. It is desi
 ## 🌟 Pro Features
 
 ### 🕹️ Advanced Hybrid Input System
-Stop fighting with basic touch controls. FlashEmu Pro offers three distinct interaction modes:
+Stop fighting with basic touch controls. BlackHat Pro offers three distinct interaction modes:
 *   **Joystick Mode:** Classical virtual stick for movement and cursor control.
 *   **Direct Touch:** The screen becomes your trackpad. Tap and slide to move the cursor instantly.
 *   **Super Mode (Hybrid):** The power-user setup. The **Joystick** sends Keyboard events (WASD/Arrows) while the **Touch Screen** controls the mouse. Perfect for strategy and action games.
@@ -51,8 +51,8 @@ Don't settle for a fixed UI. Create your own controller:
 ### Building the APK
 1. **Clone the repo:**
    ```bash
-   git clone https://github.com/Anikthedev-Official/FlashEmu.git
-   cd FlashEmu
+   git clone https://github.com/Anikthedev-Official/BlackHat.git
+   cd BlackHat
 
 2.  Add Android platform:
     cordova platform add android

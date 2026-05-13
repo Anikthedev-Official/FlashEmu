@@ -65,8 +65,7 @@ Don't settle for a fixed UI. Create your own controller:
 ```
 ├── www/
 │   ├── index.html          # Main Application Shell
-│   ├── config.html         # Visual Layout Editor
-│   ├── config.js           # Layout Saving/Loading Logic
+│   ├── editor.html         # Visual Layout Editor
 │   ├── app.js              # The "Brain" (Dispatcher & Engine Logic)
 │   ├── style.css           # Glassmorphism & Theme Styles
 │   ├── games.json          # Game Library Database
@@ -85,6 +84,6 @@ Don't settle for a fixed UI. Create your own controller:
 Built upon the incredible work of the Ruffle team. This project extends Ruffle's
 capabilities to provide a native-feeling gaming experience on Android.
 
-Developed with ⚡ and a lot of patience by Anikthedev-Official.
+Developed with 🎩**Magic** and a lot of patience by Anikthedev-Official.
 
 

@@ -13,13 +13,6 @@
     <allow-navigation href="*" />
     <preference name="Orientation" value="landscape" />
     <preference name="Fullscreen" value="true" />
-    <preference name="DisallowOverscroll" value="true" />
-    <preference name="BackgroundColor" value="0xFF0F0F0F" />
-    <preference name="KeepRunning" value="true" />
-    <preference name="AndroidLaunchMode" value="singleTop" />
-    <preference name="HardwareAccelerated" value="true" />
-    <preference name="ShowTitle" value="false" />
-    <platform name="android">
     <!-- regular icons as fallback -->
     <icon density="ldpi"    src="resources/android/icon/drawable-ldpi-icon.png" />
     <icon density="mdpi"    src="resources/android/icon/drawable-mdpi-icon.png" />

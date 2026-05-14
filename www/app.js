@@ -684,48 +684,40 @@ function buildJoystick(item) {
         }
     });
 }
+async function getSWF(url){
+if(window.cordova&&cordova.plugin?.http)
+return new Promise((r,e)=>cordova.plugin.http.sendRequest(url,{method:"get",responseType:"arraybuffer"},{},res=>r(new Uint8Array(res.data)),e));
+const res=await fetch(url); if(!res.ok) throw Error(res.status);
+return new Uint8Array(await res.arrayBuffer());
+}
 async function loadGameFile(remotePath, title) {
     const filename = remotePath.split('/').pop();
     const cacheKey = 'cached_' + filename;
     const isCached = localStorage.getItem(cacheKey) === 'true';
+
     let bytes;
 
-    // 🐒 CACHE LOAD (same logic)
+    // 🐒 LOAD FROM DEVICE CACHE (Cordova only)
     if (isCached && isCordova) {
         updateLoader(`Loading ${title} from cache...`, 40);
-        log(`Loading from cache: ${filename}`);
+        log(`Cache hit: ${filename}`);
 
         try {
             bytes = await readFromDevice(filename);
         } catch (e) {
             localStorage.removeItem(cacheKey);
-            log(`Cache miss, re-downloading...`);
+            log("Cache miss, re-downloading...");
         }
     }
 
-    // 🚀 DOWNLOAD (FIXED FOR ALL PLATFORMS)
+    // 🚀 DOWNLOAD IF NOT CACHED
     if (!bytes) {
         updateLoader(`Downloading ${title}...`, 20);
 
-        if (isCordova) {
-            // 📱 CORDOVA MODE (plugin HTTP)
-            bytes = await new Promise((resolve, reject) => {
-                cordova.plugin.http.sendRequest(
-                    remotePath,
-                    { method: "get", responseType: "arraybuffer" },
-                    {},
-                    (res) => resolve(new Uint8Array(res.data)),
-                    (err) => reject(new Error(err.error || "HTTP failed"))
-                );
-            });
-
-        } else {
-            // 🖥️ DESKTOP / NWJS / BROWSER
-            const res = await fetch(remotePath);
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-            const buffer = await res.arrayBuffer();
-            bytes = new Uint8Array(buffer);
+        try {
+            bytes = await getSWF(remotePath);
+        } catch (e) {
+            throw new Error("Download failed: " + e.message);
         }
 
         // 💾 SAVE CACHE (Cordova only)
@@ -735,12 +727,12 @@ async function loadGameFile(remotePath, title) {
                 localStorage.setItem(cacheKey, 'true');
                 log(`Cached: ${filename}`);
             } catch (e) {
-                log(`Cache save failed: ${e.message}`);
+                log("Cache save failed: " + e.message);
             }
         }
     }
 
-    // 🎮 LOAD INTO PLAYER
+    // 🎮 LOAD INTO FLASH PLAYER
     updateLoader(`Starting ${title}...`, 80);
     await currentPlayer.load({ data: bytes });
 

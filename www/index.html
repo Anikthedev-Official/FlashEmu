@@ -10,11 +10,14 @@
 <title>BlackHat Pro</title>
 <link rel="icon" type="image/svg+xml" href="icon.svg">
 <script>
-document.addEventListener("deviceready", function () {
+document.addEventListener('deviceready', function () {
+    if (window.StatusBar) {
+        StatusBar.hide();
+    }
 
-    console.log("Cordova ready");
-
-
+    if (window.AndroidFullScreen) {
+        AndroidFullScreen.immersiveMode();
+    }
 }, false);
 
 

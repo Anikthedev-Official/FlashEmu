@@ -444,7 +444,7 @@ function buildButton(item) {
 
     function fireAction() {
         const canvas = Dispatcher.getCanvas();
-
+        navigator.vibrate(50);
         if (action.startsWith('click:')) {
             const btnNum = parseInt(action.split(':')[1]);
             Dispatcher.sendClick(btnNum);

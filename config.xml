@@ -58,4 +58,7 @@
     <allow-navigation href="https://raw.githubusercontent.com/Anikthedev-Official/crispy-invention/main/" />
     <allow-intent href="https://raw.githubusercontent.com/Anikthedev-Official/crispy-invention/main/*" />
     <access origin="*" />
+    <preference name="Fullscreen" value="true" />
+<preference name="StatusBarOverlaysWebView" value="false" />
+<preference name="AndroidWindowSplashScreenBackground" value="#000000" />
 </widget>

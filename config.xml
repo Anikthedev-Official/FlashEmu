@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.mustakim.flash" version="0.0.4-6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.mustakim.flash" version="0.0.4-7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>BlackHat Pro</name>
     <description>
         Flash emulator for playing simple games and animations. Built with Cordova and JavaScript, it provides a nostalgic experience for Flash content on modern platforms.
@@ -55,7 +55,7 @@
         <icon height="1024" src="resources/ios/icon/icon-1024.png" width="1024" />
     </platform>
     <allow-navigation href="*" />
-    <allow-navigation href="https://super-sound-b232.yoiwannajinksbegam.workers.dev/" />
-    <allow-intent href="https://super-sound-b232.yoiwannajinksbegam.workers.dev/*" />
+    <allow-navigation href="https://raw.githubusercontent.com/Anikthedev-Official/crispy-invention/main/" />
+    <allow-intent href="https://raw.githubusercontent.com/Anikthedev-Official/crispy-invention/main/*" />
     <access origin="*" />
 </widget>

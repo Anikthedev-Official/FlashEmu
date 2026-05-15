@@ -64,90 +64,10 @@ async function loadEngine(version) {
         document.head.appendChild(script);
     });
 }
-// =====================================================
-// SWF DIMENSION READER — reads width/height from binary
-// =====================================================
-function getSWFDimensions(bytes) {
-    try {
-        // SWF header: 3 bytes signature + 1 byte version + 4 bytes file length
-        // then RECT structure (variable length, bit-packed)
-        const offset = 8; // skip to RECT
-        const firstByte = bytes[offset];
-        const nBits = firstByte >> 3; // top 5 bits = number of bits per value
 
-        // read enough bytes for the RECT
-        let bitPos = 5; // already consumed 5 bits
-        function readBits(n) {
-            let val = 0;
-            for (let i = 0; i < n; i++) {
-                const byteIdx = offset + Math.floor(bitPos / 8);
-                const bitIdx = 7 - (bitPos % 8);
-                val = (val << 1) | ((bytes[byteIdx] >> bitIdx) & 1);
-                bitPos++;
-            }
-            return val;
-        }
-
-        // RECT has 4 values: Xmin, Xmax, Ymin, Ymax (in twips, 1 twip = 1/20 pixel)
-        const xMin = readBits(nBits);
-        const xMax = readBits(nBits);
-        const yMin = readBits(nBits);
-        const yMax = readBits(nBits);
-
-        const width  = Math.round((xMax - xMin) / 20);
-        const height = Math.round((yMax - yMin) / 20);
-
-        return { width, height };
-    } catch(e) {
-        log("Could not read SWF dimensions: " + e.message);
-        return null;
-    }
-}
 
 // =====================================================
-// BLACK BAR LETTERBOX — places exact black divs
-// =====================================================
-function applyLetterbox(gameWidth, gameHeight) {
-    // remove old bars
-    document.querySelectorAll('.letterbox-bar').forEach(el => el.remove());
 
-    const screenW = window.innerWidth;
-    const screenH = window.innerHeight;
-
-    const scaleX = screenW / gameWidth;
-    const scaleY = screenH / gameHeight;
-    const scale  = Math.min(scaleX, scaleY); // fit inside screen
-
-    const scaledW = Math.round(gameWidth  * scale);
-    const scaledH = Math.round(gameHeight * scale);
-
-    const padX = Math.round((screenW - scaledW) / 2);
-    const padY = Math.round((screenH - scaledH) / 2);
-
-    log(`Game: ${gameWidth}x${gameHeight} → scaled: ${scaledW}x${scaledH} | bars: ${padX}px sides, ${padY}px top/bottom`);
-
-    function makeBar(style) {
-        const bar = document.createElement('div');
-        bar.className = 'letterbox-bar';
-        bar.style.cssText = `
-            position: fixed;
-            background: #000;
-            z-index: 500;
-            pointer-events: none;
-            ${style}
-        `;
-        document.body.appendChild(bar);
-    }
-
-    if (padX > 0) {
-        makeBar(`top:0; left:0; width:${padX}px; height:100%;`);
-        makeBar(`top:0; right:0; width:${padX}px; height:100%;`);
-    }
-    if (padY > 0) {
-        makeBar(`top:0; left:0; width:100%; height:${padY}px;`);
-        makeBar(`bottom:0; left:0; width:100%; height:${padY}px;`);
-    }
-}
 // -------------------------------------------------------
 // 3. REPLACE initPlayer() with this performance version
 //    Has: lazy loading, resolution scale, preload hint,
@@ -201,9 +121,19 @@ currentPlayer = ruffle.createPlayer({
     }
 }
 
+const Platform = {
+    isCordova: !!window.cordova,
+    isNWJS: typeof window.process === "object" && !!window.process.versions?.nw,
+    isBrowser: !window.cordova && !(typeof window.process === "object"),
+};
 
+Platform.isDesktop =
+    !Platform.isCordova &&
+    (Platform.isNWJS ||
+        !/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent));
 // --- MAIN APP START ---
 window.onload = async () => {
+    //here cordova ??
     console.log("!!! APP.JS FILE LOADED SUCCESSFULLY !!!");
     console.log("REACHED BEFORE TRY");
             document.getElementById('left-controls').style.display  = 'none';
@@ -288,12 +218,13 @@ function showLoader(msg) {
        //           navigator.maxTouchPoints === 0 && 
         //          !navigator.userAgent.match(/Android|iPhone|iPad|iPod|Mobile/i) &&
         //          window.innerWidth > 600;
+/*
 const isCordova = !!window.cordova;
 const isNWJS = typeof window.process === "object";
-const isDesktop = !isCordova && (isNWJS || !/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent));
-        console.log("isDesktop:", isDesktop, "| ontouchstart:", ('ontouchstart' in window), "| maxTouchPoints:", navigator.maxTouchPoints, "| UA:", navigator.userAgent);
-
-if (isDesktop) {
+const Platform.isDesktop = !isCordova && (isNWJS || !/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent));
+        console.log("Platform.isDesktop:", isDesktop, "| ontouchstart:", ('ontouchstart' in window), "| maxTouchPoints:", navigator.maxTouchPoints, "| UA:", navigator.userAgent);
+*/
+if (Platform.isDesktop) {
     const choice = await new Promise(resolve => {
         const overlay = document.createElement('div');
         overlay.style.cssText = `
@@ -499,7 +430,7 @@ if (isDesktop) {
 
             log(`Layout loaded (${isDirect ? 'direct' : 'joystick'} cursor mode)`);
         }
-
+window.buildLayoutControls = buildLayoutControls;
 function buildButton(item) {
     const btn = document.createElement('button');
     btn.innerText = item.name;
@@ -684,11 +615,24 @@ function buildJoystick(item) {
         }
     });
 }
-async function getSWF(url){
-if(window.cordova&&cordova.plugin?.http)
-return new Promise((r,e)=>cordova.plugin.http.sendRequest(url,{method:"get",responseType:"arraybuffer"},{},res=>r(new Uint8Array(res.data)),e));
-const res=await fetch(url); if(!res.ok) throw Error(res.status);
-return new Uint8Array(await res.arrayBuffer());
+async function getSWF(url, onProgress = () => {}) {
+    console.log("Downloading:", url);
+
+    // Cordova native HTTP — bypasses CORS
+    if (Platform.isCordova && window.cordova?.plugin?.http) {
+        const res = await new Promise((resolve, reject) => {
+            cordova.plugin.http.sendRequest(
+                url, { method: "get", responseType: "arraybuffer" }, {},
+                resolve, reject
+            );
+        });
+        return new Uint8Array(res.data);
+    }
+
+    // Browser/NW.js — plain fetch, no HEAD request
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    return new Uint8Array(await res.arrayBuffer());
 }
 async function loadGameFile(remotePath, title) {
     const filename = remotePath.split('/').pop();
@@ -698,7 +642,7 @@ async function loadGameFile(remotePath, title) {
     let bytes;
 
     // 🐒 LOAD FROM DEVICE CACHE (Cordova only)
-    if (isCached && isCordova) {
+    if (isCached && Platform.isCordova) {
         updateLoader(`Loading ${title} from cache...`, 40);
         log(`Cache hit: ${filename}`);
 
@@ -715,13 +659,15 @@ async function loadGameFile(remotePath, title) {
         updateLoader(`Downloading ${title}...`, 20);
 
         try {
-            bytes = await getSWF(remotePath);
+            bytes = await getSWF(remotePath, (p) => {
+    updateLoader(`Downloading... ${p}%`, p);
+});
         } catch (e) {
             throw new Error("Download failed: " + e.message);
         }
 
         // 💾 SAVE CACHE (Cordova only)
-        if (isCordova) {
+        if (Platform.isCordova) {
             try {
                 await saveToDevice(filename, bytes);
                 localStorage.setItem(cacheKey, 'true');

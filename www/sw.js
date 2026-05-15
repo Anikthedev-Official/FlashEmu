@@ -35,31 +35,27 @@ self.addEventListener('activate', (e) => {
 
 // Fetch — cache first for engine files, network first for everything else
 self.addEventListener('fetch', (e) => {
-    const url = new URL(e.request.url);
+    const req = e.request;
 
-    // Cache-first for Ruffle engine (huge file, never changes)
-    if (url.pathname.includes('/engines/')) {
-        e.respondWith(
-            caches.match(e.request).then(cached => {
-                if (cached) return cached;
-                return fetch(e.request).then(response => {
-                    const clone = response.clone();
-                    caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
-                    return response;
-                });
-            })
-        );
-        return;
-    }
+    // 🚫 BLOCK unsupported schemes
+    if (!req.url.startsWith('http')) return;
 
-    // Network-first for everything else (so updates work)
     e.respondWith(
-        fetch(e.request)
+        fetch(req)
             .then(response => {
+                // 🚫 don't cache bad responses
+                if (!response || response.status !== 200) {
+                    return response;
+                }
+
                 const clone = response.clone();
-                caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
+
+                caches.open(CACHE_NAME).then(cache => {
+                    cache.put(req, clone).catch(() => {});
+                });
+
                 return response;
             })
-            .catch(() => caches.match(e.request))
+            .catch(() => caches.match(req))
     );
 });

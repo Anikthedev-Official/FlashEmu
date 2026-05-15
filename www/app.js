@@ -3,13 +3,17 @@
  * Fixes: Typo corrections, Function scope, and Race-Condition handling.
  * non gay version of app.js, for the purists out there. 
  * ^ joke
- * soo if your my brother and you see this, please dont roast me for the code quality, i know its bad, but it works and i dont care to fix it.
- * also this file is a mess, but it was made in a rush, so yeah. 
- * if you want to improve it, go ahead, but please dont break it. 
- * also if you find any bugs, please tell me, but again, dont break it. 
- * thanks for using flash emu pro, and enjoy your flash games!
- * and pritom bhaiya yeah i know this code is bad, but it works and i dont care to fix it.
  */
+window.Platform = window.Platform || {
+    isCordova: !!window.cordova,
+    isNWJS: typeof window.process === "object" && !!window.process.versions?.nw,
+    isBrowser: !window.cordova && !(typeof window.process === "object"),
+};
+
+Platform.isDesktop =
+    !Platform.isCordova &&
+    (Platform.isNWJS ||
+        !/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent));
 
 function log(msg) {
     console.log("DEBUG: " + msg + " " + "why is this here and why are you reading it"); 
@@ -121,16 +125,7 @@ currentPlayer = ruffle.createPlayer({
     }
 }
 
-const Platform = {
-    isCordova: !!window.cordova,
-    isNWJS: typeof window.process === "object" && !!window.process.versions?.nw,
-    isBrowser: !window.cordova && !(typeof window.process === "object"),
-};
 
-Platform.isDesktop =
-    !Platform.isCordova &&
-    (Platform.isNWJS ||
-        !/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent));
 // --- MAIN APP START ---
 window.onload = async () => {
     //here cordova ??
@@ -138,7 +133,13 @@ window.onload = async () => {
     console.log("REACHED BEFORE TRY");
             document.getElementById('left-controls').style.display  = 'none';
         document.getElementById('right-controls').style.display = 'none';
-        document.getElementById('controls-layer').style.display = 'none'; // add this
+        document.getElementById('controls-layer').style.display = 'none';
+        if (Platform.isCordova) {
+                        document.getElementById('left-controls').style.display  = 'none';
+        document.getElementById('right-controls').style.display = 'none';
+        document.getElementById('controls-layer').style.display = 'none'
+        }
+        // add this
 
     try {
         console.log("INSIDE TRY"); // add this

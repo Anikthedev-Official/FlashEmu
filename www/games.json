@@ -58,5 +58,40 @@
         "category": "Action",
 
         "file": "https://raw.githubusercontent.com/Anikthedev-Official/crispy-invention/main/wolverine.swf"
+    },
+    {
+        "title": "Red Ball 4 Volume 1",
+        "category": "Platformer",
+        "file": "https://raw.githubusercontent.com/Anikthedev-Official/crispy-invention/main/4v1.swf"
+    },
+    {
+        "title": "Red Ball 4 Volume 2",
+        "category": "Platformer",
+
+        "file": "https://raw.githubusercontent.com/Anikthedev-Official/crispy-invention/main/4v2.swf"
+    },
+    {
+        "title": "Red Ball 4 Volume 3",
+        "category": "Platformer",
+
+        "file": "https://raw.githubusercontent.com/Anikthedev-Official/crispy-invention/main/4v3.swf"
+    },
+    {
+        "title": "Red Ball 2",
+        "category": "Platformer",
+
+        "file": "https://raw.githubusercontent.com/Anikthedev-Official/crispy-invention/main/redball2.swf"  
+    },
+    {
+        "title": "Red Ball 3",
+        "category": "Platformer",
+
+        "file": "https://raw.githubusercontent.com/Anikthedev-Official/crispy-invention/main/redball3.swf"
+    },
+    {
+        "title": "Red Ball 1",
+        "category": "Platformer",
+
+        "file": "https://raw.githubusercontent.com/Anikthedev-Official/crispy-invention/main/RedBall_17Levels.swf"    
     }
 ]

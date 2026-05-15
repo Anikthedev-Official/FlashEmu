@@ -616,6 +616,8 @@ function buildJoystick(item) {
         }
     });
 }
+function getSWFDimensions() {
+}
 async function getSWF(url, onProgress = () => {}) {
     console.log("Downloading:", url);
 

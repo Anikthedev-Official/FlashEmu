@@ -93,5 +93,38 @@
         "category": "Platformer",
 
         "file": "https://raw.githubusercontent.com/Anikthedev-Official/crispy-invention/main/RedBall_17Levels.swf"    
+    },
+    {
+        "title": "Angry Birds Rio",
+        "category": "Action",
+        "file": "https://raw.githubusercontent.com/Anikthedev-Official/crispy-invention/main/angry-birds-rio.swf"
+    }, 
+    {
+        "title": "Angry Birds Star Wars",
+        "category": "Action",
+
+        "file": "https://raw.githubusercontent.com/Anikthedev-Official/crispy-invention/main/angry-birds-star-wars.swf"
+    },
+    {
+        "title": "Angry Birds Counterattack",
+        "category": "Action",
+
+        "file": "https://raw.githubusercontent.com/Anikthedev-Official/crispy-invention/main/angry_bird_counterattack.swf"
+    },
+    {
+        "title": "Angry Birds Space",
+        "category": "Action",
+
+        "file": "https://raw.githubusercontent.com/Anikthedev-Official/crispy-invention/main/angry-birds-space-1596.swf"
+    },
+    {
+        "title": "Angry  Birds Halloween",
+        "category": "Action",
+        "file": "https://raw.githubusercontent.com/Anikthedev-Official/crispy-invention/main/angry-birds-halloween.swf"
+    },
+    {
+        "title": "Angry Birds Chrome",
+        "category": "Action",
+        "file": "https://raw.githubusercontent.com/Anikthedev-Official/crispy-invention/main/angry-birds-chrome.swf"
     }
 ]

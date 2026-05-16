@@ -35,27 +35,15 @@ self.addEventListener('activate', (e) => {
 
 // Fetch — cache first for engine files, network first for everything else
 self.addEventListener('fetch', (e) => {
-    const req = e.request;
-
-    // 🚫 BLOCK unsupported schemes
-    if (!req.url.startsWith('http')) return;
-
     e.respondWith(
-        fetch(req)
-            .then(response => {
-                // 🚫 don't cache bad responses
-                if (!response || response.status !== 200) {
-                    return response;
-                }
-
-                const clone = response.clone();
-
-                caches.open(CACHE_NAME).then(cache => {
-                    cache.put(req, clone).catch(() => {});
-                });
-
-                return response;
+        fetch(e.request)
+            .then(res => {
+                // only cache valid responses
+                if (!res || res.status !== 200 || res.type === 'opaque') return res;
+                const clone = res.clone();
+                caches.open('flash-emu-pro-v1').then(cache => cache.put(e.request, clone));
+                return res;
             })
-            .catch(() => caches.match(req))
+            .catch(() => caches.match(e.request))
     );
 });

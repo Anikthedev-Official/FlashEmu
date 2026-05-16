@@ -263,7 +263,7 @@ if (Platform.isDesktop) {
         document.getElementById('left-controls').style.display  = 'none';
         document.getElementById('right-controls').style.display = 'none';
         document.getElementById('controls-layer').style.display = 'none';
-        document.getElementById('debug-log').style.display = 'none';
+
     }
     // touch: do nothing, everything stays normal
 }
@@ -930,6 +930,7 @@ fileInput.onchange = async (e) => {
     hideLoader();
 };
 
+
         // =====================================================
         // BOOT
         // =====================================================
@@ -943,12 +944,8 @@ loadLibrary();
 buildLayoutControls();
 updateLoader("Ready!", 100);
 setTimeout(hideLoader, 700); 
-document.getElementById('clear-cache-btn').onclick = () => {
-    Object.keys(localStorage)
-        .filter(k => k.startsWith('cached_'))
-        .forEach(k => localStorage.removeItem(k));
-    log('Cache cleared — games will re-download on next play');
-};
+initGlobalLibrary();
+
 log("Ready. All systems active.");
 window.buildLayoutControls = buildLayoutControls;// expose for layout library
 

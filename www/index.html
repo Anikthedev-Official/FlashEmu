@@ -25,7 +25,25 @@ document.addEventListener('deviceready', function () {
 
 </head>
 <body class="theme-ruffle">
-
+<button id="fullscreen-btn" style="
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    z-index: 1001;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    transition: opacity 0.2s;
+">⛶</button>
     <div id="header">
         <div id="app-title">BLACKHAT <span>PRO</span></div>
            <button id="library-toggle">Library</button>

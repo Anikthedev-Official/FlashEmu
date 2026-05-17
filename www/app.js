@@ -930,7 +930,26 @@ fileInput.onchange = async (e) => {
     hideLoader();
 };
 
+// FULLSCREEN BUTTON
+const fsBtn = document.getElementById('fullscreen-btn');
+fsBtn.onclick = () => {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {
+            // fallback for Cordova — use AndroidFullScreen plugin
+            if (window.AndroidFullScreen) {
+                AndroidFullScreen.immersiveMode();
+            }
+        });
+        fsBtn.innerText = '⛶'; // same icon, fullscreen active
+    } else {
+        document.exitFullscreen();
+    }
+};
 
+// update icon when fullscreen changes (e.g. user presses back)
+document.addEventListener('fullscreenchange', () => {
+    fsBtn.innerText = document.fullscreenElement ? '⛶' : '⛶';
+});
         // =====================================================
         // BOOT
         // =====================================================
